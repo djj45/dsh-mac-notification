@@ -31,7 +31,7 @@ dsh plugin --profile web add link:$(pwd)/packages/dsh-mac-notification
 
 ## 依赖约定
 
-`@deepseek-ai/dsh-*`、`@deepseek-ai/cordis`、`react` 均为 peerDependencies，运行时从 dsh profile 树解析，不随本仓库安装（`autoInstallPeers: false`）。devDependencies 仅用于本地构建。
+`@deepseek-ai/dsh-*`、`@deepseek-ai/cordis`、`react` 均为 peerDependencies，运行时从 dsh profile 树解析，不随本仓库安装（`autoInstallPeers: false`）。dsh 家族 peer 范围取 `^0.1.0-rc.5 || ^0.1.0-rc.6`，兼容 rc.5 源码启动与 rc.6 npm 发布；devDependencies 固定 rc.6 用于本地构建。
 
 > 完整单元测试（含 100% 覆盖率）保留在功能最初的开发地 —— 主仓库 `packages/client/ui-notifications`。本独立包专注可构建、可安装的最小交付。
 
