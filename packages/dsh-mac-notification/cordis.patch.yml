@@ -1,0 +1,7 @@
+# dsh-mac-notification bundle patch: inserts the dual-face plugin row into the
+# web profile roster. Applied as a profile bundle layer (the `dsh.bundle.patch`
+# manifest field); activate with
+# `dsh plugin --profile web add @djj45/dsh-mac-notification`.
+- insert:
+    - id: mac-notification
+      name: '@djj45/dsh-mac-notification'
