@@ -24,6 +24,10 @@ dsh plugin --profile web add link:$(pwd)/packages/dsh-mac-notification
 
 装完重启 `dsh web`，到设置 → 常规 打开开关并允许浏览器通知权限即可。
 
+## 设置持久化
+
+偏好优先写入 dsh Host settings 文档的 `ui-notifications.completionEnabled`。dsh 0.1.0-rc.5 / rc.6 的 settings 网关只暴露一份硬编码的 namespace 白名单，第三方 namespace 的读写会被 `settings-not-exposed` 拒绝；此时浏览器半部自动回退到 localStorage（键 `dsh-mac-notification.completion-enabled`），因此页面重载或 `dsh web` 重启后开关不会丢。dsh 开放第三方 namespace 暴露后，代码无需改动会自动继续走 Host 文档。
+
 ## 结构
 
 - `packages/dsh-mac-notification`：插件本体。`.` 为 host 半部（注册 `ui-notifications` settings namespace），`./client` 为浏览器半部（注册 settings 行 + 监听会话完成边沿）。

@@ -56,8 +56,9 @@ export function apply(ctx: ClientContext): void {
     open: (id) => { sessions.open(id) },
   })
 
-  // Watcher: any list or settings change re-syncs edges. Permission is read
-  // per fire, so a browser-side revocation takes effect without a reload.
+  // Watcher: any list, preference, or Host-settings change re-syncs edges.
+  // Permission is read per fire, so a browser-side revocation takes effect
+  // without a reload.
   const sync = (): void => {
     notifier.setEnabled(policy.enabled.getSnapshot())
     notifier.sync(sessions.list.getSnapshot())
@@ -65,10 +66,12 @@ export function apply(ctx: ClientContext): void {
   ctx.effect(() => {
     const offList = sessions.list.subscribe(sync)
     const offSettings = host.subscribe(sync)
+    const offEnabled = policy.enabled.subscribe(sync)
     sync()
     return () => {
       offList()
       offSettings()
+      offEnabled()
     }
   }, 'ui-notifications: completion watch')
 
